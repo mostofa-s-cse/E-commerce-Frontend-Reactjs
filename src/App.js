@@ -7,13 +7,14 @@ import SignUp from "./components/SignUp";
 import AddProduct from "./components/AddProduct";
 import UpdateProduct from "./components/UpdateProduct";
 
+import Protected from "./components/Protected";
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/add" element={<AddProduct />}></Route>
-        <Route path="/update" element={<UpdateProduct />}></Route>
+        <Route path="/add" element={< Protected Cmp={AddProduct} />}></Route>
+        <Route path="/update" element={< Protected Cmp={UpdateProduct} />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
       </Routes>

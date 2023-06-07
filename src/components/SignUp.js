@@ -1,6 +1,15 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 function SignUp()
 {
+    const navigate = useNavigate();
+    useEffect(()=>{
+        if(localStorage.getItem('user-info'))
+        {
+            navigate("/add");
+        }
+    },[])
+    
     const [name,setName]=useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -16,7 +25,9 @@ function SignUp()
             }
         })
         result = await result.json();
-            console.log("result: ",result)
+        // console.log("result: ",result)
+        localStorage.setItem("user-info",JSON.stringify(result))
+        
     }
     return (
         <div className="col-md-6 m-auto text-center">
