@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 function SignUp()
 {
     const navigate = useNavigate();
-    useEffect(()=>{
-        if(localStorage.getItem('user-info'))
-        {
-            navigate("/add");
-        }
-    },[])
+   
     
     const [name,setName]=useState("");
     const [email,setEmail] = useState("");
@@ -27,7 +22,13 @@ function SignUp()
         result = await result.json();
         // console.log("result: ",result)
         localStorage.setItem("user-info",JSON.stringify(result))
-        
+        // useEffect(()=>{
+            
+        // },[])
+        if(localStorage.getItem('user-info'))
+            {
+                navigate("/add");
+            }
     }
     return (
         <div className="col-md-6 m-auto text-center">
