@@ -9,7 +9,7 @@ function Login()
 
     async function Login(){
         let item ={email,password}
-        let result = await fetch("http://localhost:8000/api/signup",{
+        let result = await fetch("http://localhost:8000/api/login",{
             method:'POST',
             body:JSON.stringify(item),
             headers:{
@@ -23,10 +23,16 @@ function Login()
         // useEffect(()=>{
             
         // },[])
-        if(localStorage.getItem('user-info'))
-            {
-                navigate("/add");
-            }
+        let user = JSON.parse(localStorage.getItem('user-info'));
+        // navigate("/add");
+        if (user.error === "Email or password is not matched") {
+            alert(user.error);
+        } else {
+            navigate("/add");
+        }
+
+
+
     }
     return (
         <div className="col-md-6 m-auto text-center">
