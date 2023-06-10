@@ -8,11 +8,13 @@ import AddProduct from "./components/AddProduct";
 import UpdateProduct from "./components/UpdateProduct";
 
 import Protected from "./components/Protected";
+import ProductList from "./components/ProductList";
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
+        <Route path="/" element={< Protected Cmp={ProductList} />}></Route>
         <Route path="/add" element={< Protected Cmp={AddProduct} />}></Route>
         <Route path="/update" element={< Protected Cmp={UpdateProduct} />}></Route>
         <Route path="/login" element={<Login />}></Route>
