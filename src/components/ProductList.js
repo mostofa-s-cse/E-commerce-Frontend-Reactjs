@@ -18,8 +18,9 @@ function ProductList() {
       let result=await fetch(`http://localhost:8000/api/delete/${id}`,{
           method:'DELETE'
       });
-      result=result.json();
-      alert(result.result)
+      result= await result.json();
+      alert(result.success)
+      console.log("result.success",result)
       AllProduct();
     //   window.location.reload();
       
