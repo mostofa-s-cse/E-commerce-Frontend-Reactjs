@@ -4,13 +4,25 @@ import Table from "react-bootstrap/Table";
 function ProductList() {
   const [data, setData] = useState([]);
   useEffect(async () => {
-    async function AllProduct() {
-      let result = await fetch("http://localhost:8000/api/list");
-      let product = await result.json();
-      setData(product);
-    }
     AllProduct();
+   
   }, []);
+  async function AllProduct() {
+    let result = await fetch("http://localhost:8000/api/list");
+    let product = await result.json();
+    setData(product);
+  }
+  async function deleteProduct(id)
+  {
+      let result=await fetch(`http://localhost:8000/api/delete/${id}`,{
+          method:'DELETE'
+      });
+      result=result.json();
+      alert(result.result)
+      AllProduct();
+    //   window.location.reload();
+      
+  }
   console.log("prosuct", data);
   return (
     <div className="container">
@@ -44,7 +56,7 @@ function ProductList() {
                 <td>
                   <div className="d-flex">
                     <Button variant="success">Edit</Button>
-                    <Button variant="danger" style={{marginLeft:"10px"}}>Delete</Button>
+                    <Button variant="danger" style={{marginLeft:"10px"}} onClick={()=>deleteProduct(item.id)}>Delete</Button>
                   </div>
                 </td>
               </tr>

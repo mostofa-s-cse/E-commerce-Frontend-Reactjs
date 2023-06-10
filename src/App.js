@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={< Protected Cmp={ProductList} />}></Route>
+        <Route path="/productList" element={< Protected Cmp={ProductList} />}></Route>
         <Route path="/add" element={< Protected Cmp={AddProduct} />}></Route>
         <Route path="/update" element={< Protected Cmp={UpdateProduct} />}></Route>
         <Route path="/login" element={<Login />}></Route>
