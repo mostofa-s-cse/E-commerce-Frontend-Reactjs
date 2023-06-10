@@ -9,6 +9,7 @@ import UpdateProduct from "./components/UpdateProduct";
 
 import Protected from "./components/Protected";
 import ProductList from "./components/ProductList";
+import SearchProduct from "./components/SearchProduct";
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
         <Route path="/productList" element={< Protected Cmp={ProductList} />}></Route>
         <Route path="/add" element={< Protected Cmp={AddProduct} />}></Route>
         <Route path="/update/:id" element={< Protected Cmp={UpdateProduct} />}></Route>
+        <Route path="/search" element={< Protected Cmp={SearchProduct} />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
       </Routes>
