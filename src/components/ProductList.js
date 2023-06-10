@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 function ProductList() {
   const [data, setData] = useState([]);
   useEffect(async () => {
@@ -55,7 +56,7 @@ function ProductList() {
                 </td>
                 <td>
                   <div className="d-flex">
-                    <Button variant="success">Edit</Button>
+                    <a href={`/update/${item.id}`} className="btn btn-success">Update</a>
                     <Button variant="danger" style={{marginLeft:"10px"}} onClick={()=>deleteProduct(item.id)}>Delete</Button>
                   </div>
                 </td>
