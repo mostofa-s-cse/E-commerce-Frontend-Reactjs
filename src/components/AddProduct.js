@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AddProduct() {
+const AddProduct = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -64,6 +64,6 @@ function AddProduct() {
       </div>
     </div>
   );
-}
+};
 
 export default AddProduct;

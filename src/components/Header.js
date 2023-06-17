@@ -1,10 +1,10 @@
-import userEvent from "@testing-library/user-event";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
-function Header() {
+const Header = () => {
   let user = JSON.parse(localStorage.getItem("user-info"));
   // console.log(user)
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Header() {
               <>
                 <Link to="/productList">All Products</Link>
                 <Link to="/add">Add Product</Link>
-                <Link to="/update">Update Product</Link>
+                {/* <Link to="/update">Update Product</Link> */}
                 <Link to="/search">Search Product</Link>
               </>
             ) : (
@@ -53,6 +53,6 @@ function Header() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Header;

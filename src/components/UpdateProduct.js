@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-function UpdateProduct() {
+
+const UpdateProduct = () => {
   const id = useParams();
   //   console.log("id", id);
   const [data, setData] = useState("");
@@ -18,20 +19,26 @@ function UpdateProduct() {
     formData.append("price", price);
     formData.append("description", description);
 
-    let result = await fetch(`http://localhost:8000/api/updateproduct/${id.id}`, {
-      method: "PUT",
-      // body:JSON.stringify(formData),
-      body: formData,
-    });
+    let result = await fetch(
+      `http://localhost:8000/api/updateproduct/${id.id}`,
+      {
+        method: "put",
+        // body:JSON.stringify(formData),
+        body: formData,
+      }
+    );
     alert("data has been saved");
     navigate("/productList");
   }
-  useEffect(async () => {
-    let result = await fetch(
-      `http://localhost:8000/api/product/${id.id}`
-    );
+  async function GetProduct() {
+    let result = await fetch(`http://localhost:8000/api/product/${id.id}`);
+    // console.log("re",result);
     result = await result.json();
-    setData(result);
+    // console.log("object",)
+    setData(result.Product);
+  }
+  useEffect(() => {
+    GetProduct();
   }, []);
   return (
     <div className="col-md-6 m-auto">
@@ -77,6 +84,6 @@ function UpdateProduct() {
       </div>
     </div>
   );
-}
+};
 
 export default UpdateProduct;
