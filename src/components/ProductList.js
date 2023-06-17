@@ -1,25 +1,34 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const [data, setData] = useState([]);
- 
+
+  const navigate = useNavigate();
   async function AllProduct() {
-    let result = await fetch("http://localhost:8000/api/list");
-    let product = await result.json();
-    setData(product);
+    try {
+      const response = await axios.get("http://localhost:8000/api/products");
+      // console.log('rrrrr',response.data.products);
+      setData(response.data.products);
+    } catch (error) {
+      console.error(error);
+    }
   }
   async function deleteProduct(id) {
-    let result = await fetch(`http://localhost:8000/api/delete/${id}`, {
-      method: "DELETE",
-    });
-    result = await result.json();
-    alert(result.success);
-    console.log("result.success", result);
-    AllProduct();
-    //   window.location.reload();
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/api/productdelete/${id}`
+      );
+      alert(response.data.message);
+      navigate("/productList");
+    } catch (error) {
+      console.error(error);
+      alert(error.response.data.message);
+      // alert(error);
+    }
   }
   useEffect(() => {
     AllProduct();
@@ -51,7 +60,7 @@ const ProductList = () => {
                   {" "}
                   <img
                     style={{ height: "20px", width: "20px" }}
-                    src={"http://localhost:8000/" + item.image}
+                    src={"http://localhost:8000/storage/" + item.image}
                   />
                 </td>
                 <td>

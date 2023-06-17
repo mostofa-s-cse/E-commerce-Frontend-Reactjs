@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
-  const id = useParams();
+  const Getid = useParams();
+  let id = Getid.id;
   //   console.log("id", id);
   const [data, setData] = useState("");
   const navigate = useNavigate();
@@ -12,34 +14,34 @@ const UpdateProduct = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
-  async function UpdateProduct() {
+  async function ProductUpdate() {
     const formData = new FormData();
     formData.append("image", image);
     formData.append("name", name);
-    formData.append("price", price);
+    // formData.append("price", price);
     formData.append("description", description);
-
-    let result = await fetch(
-      `http://localhost:8000/api/updateproduct/${id.id}`,
-      {
-        method: "put",
-        // body:JSON.stringify(formData),
-        body: formData,
-      }
-    );
-    alert("data has been saved");
-    navigate("/productList");
+    try {
+      const response = await axios.put(`http://localhost:8000/api/productsupdate/${id}`, formData);
+      alert(response.data.message);
+      navigate("/productList");
+    } catch (error) {
+      console.error(error);
+      alert(error.response.data.message);
+      // alert(error);
+    }
   }
   async function GetProduct() {
-    let result = await fetch(`http://localhost:8000/api/product/${id.id}`);
-    // console.log("re",result);
-    result = await result.json();
-    // console.log("object",)
-    setData(result.Product);
+    try {
+      const response = await axios.get(`http://localhost:8000/api/products/${id}`);
+      console.log('rrrrr',response.data.product);
+      setData(response.data.product);
+    } catch (error) {
+      console.error(error);
+    }
   }
   useEffect(() => {
     GetProduct();
-  }, []);
+  }, [id]);
   return (
     <div className="col-md-6 m-auto">
       <div className="mt-5 shadow p-5">
@@ -67,7 +69,7 @@ const UpdateProduct = () => {
         />
         <img
           style={{ height: "100px", width: "100px" }}
-          src={"http://localhost:8000/" + data.image}
+          src={"http://localhost:8000/storage/" + data.image}
         />
         <br />
         <textarea
@@ -78,7 +80,7 @@ const UpdateProduct = () => {
           placeholder="description"
         />
         <br />
-        <button onClick={UpdateProduct} className="btn btn-primary">
+        <button onClick={ProductUpdate} className="btn btn-primary">
           Update Product
         </button>
       </div>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,15 +16,32 @@ const AddProduct = () => {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
-
-    let result = await fetch("http://localhost:8000/api/addproduct", {
-      method: "POST",
-      // body:JSON.stringify(formData),
-      body: formData,
-    });
-    alert("data has been saved");
-    navigate("/productList");
+    try {
+      const response = await axios.post("http://localhost:8000/api/products", formData);
+      alert(response.data.message);
+      navigate("/productList");
+    } catch (error) {
+      console.error(error);
+      alert(error.response.data.message);
+      // alert(error);
+    }
   }
+
+  // async function AddProduct() {
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+  //   formData.append("name", name);
+  //   formData.append("price", price);
+  //   formData.append("description", description);
+
+  //   let result = await fetch("http://localhost:8000/api/products", {
+  //     method: "POST",
+  //     // body:JSON.stringify(formData),
+  //     body: formData,
+  //   });
+  //   alert("data has been saved");
+  //   navigate("/productList");
+  // }
   return (
     <div className="col-md-6 m-auto text-center">
       <div className="mt-5 shadow p-5">
