@@ -16,12 +16,13 @@ const UpdateProduct = () => {
 
   async function ProductUpdate() {
     const formData = new FormData();
+    formData.append('_method', 'PUT');
     formData.append("image", image);
     formData.append("name", name);
-    // formData.append("price", price);
+    formData.append("price", price);
     formData.append("description", description);
     try {
-      const response = await axios.put(`http://localhost:8000/api/productsupdate/${id}`, formData);
+      const response = await axios.post(`http://localhost:8000/api/productsupdate/${id}`, formData);
       alert(response.data.message);
       navigate("/productList");
     } catch (error) {

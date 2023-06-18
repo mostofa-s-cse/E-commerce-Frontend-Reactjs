@@ -59,7 +59,7 @@ const ProductList = () => {
                 <td>
                   {" "}
                   <img
-                    style={{ height: "20px", width: "20px" }}
+                    style={{ height: "40px", width: "40px" }}
                     src={"http://localhost:8000/storage/" + item.image}
                   />
                 </td>
